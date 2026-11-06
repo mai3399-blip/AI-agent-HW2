@@ -487,3 +487,12 @@ Follow this workflow:
 6. Prepare the final deliverables for GitHub and Colab.
 
 Do not proceed beyond step 1 in the current request.
+
+## 14. Revision History
+
+Before implementation, two clarifications were made to the original specification:
+
+- Section 9: Removed the undefined cancellation requirement. Tests must cover all defined graph paths, including rejection.
+- Section 5: Clarified that `check_delivery` sets `status = "accepted"` before message generation, `generate_message` uses the existing status, `reject_order` sets `status = "rejected"`, and `finalize_order` verifies and preserves the correct status.
+
+These revisions did not change the State fields, Nodes, graph structure, business rules, or ten required test scenarios.
