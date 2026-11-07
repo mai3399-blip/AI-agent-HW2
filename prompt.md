@@ -423,14 +423,14 @@ The notebook must:
 6. Build and compile the LangGraph graph.
 7. Display the graph using `draw_mermaid_png()`.
 8. Include clear Markdown explanations.
-9. Execute example orders.
-10. Demonstrate at least six test orders created specifically for this assignment.
+9. Use the required test orders as executable examples; do not execute additional standalone example orders.
+10. Execute and display exactly the ten original required test scenarios in Section 10.
 11. Include tests that collectively cover all defined graph paths, including rejection.
 12. Run successfully in a fresh Google Colab session without API keys.
 
 ## 10. Required Test Coverage
 
-Include at least the following scenarios:
+Execute and display exactly the following ten scenarios:
 
 | Test | Order | Expected behavior |
 |---|---|---|
@@ -445,9 +445,22 @@ Include at least the following scenarios:
 | 9 | 2 challahs, Monday, Tel Aviv | Accepted, automatically changed to pickup, total 36 NIS |
 | 10 | 2 challahs, Monday, empty city | Accepted, pickup, total 36 NIS |
 
-These tests are minimum required scenarios for this implementation. Add further tests if needed to cover any missing conditional path.
+Keep only these ten scenarios in the final notebook. Do not execute or display additional test scenarios or direct Node tests. Preserve all ten scenarios and their assertions and expected results.
 
 Use assertions to verify expected results, not only printed output.
+
+### 10.1 Readable test results
+
+For each of the ten required test scenarios, display readable output in Google Colab using simple formatting:
+
+1. Test number, description, and input order.
+2. Actual output: `status`, final `item`, `delivery`, and `total`.
+3. The customer-facing `message`.
+4. The full chronological `steps` log, with each step on a separate line.
+5. Expected versus actual values for the assertions, showing concrete compared values where applicable rather than only whether the assertion condition is true.
+6. A clear PASS or FAIL indicator for each assertion and the overall scenario.
+
+Preserve all ten required scenarios, their assertions, and expected results. Do not suppress failures or present failed tests as passing.
 
 ## 11. Technical Constraints
 
@@ -496,3 +509,10 @@ Before implementation, two clarifications were made to the original specificatio
 - Section 5: Clarified that `check_delivery` sets `status = "accepted"` before message generation, `generate_message` uses the existing status, `reject_order` sets `status = "rejected"`, and `finalize_order` verifies and preserves the correct status.
 
 These revisions did not change the State fields, Nodes, graph structure, business rules, or ten required test scenarios.
+
+
+During development, the following presentation requirement was added:
+
+- Section 10.1: Required readable results for every test scenario, including the input, actual output, customer message, chronological steps on separate lines, expected versus actual assertion values, and PASS/FAIL indicators. This change was made so reviewers can understand each order outcome and verify the tests without interpreting terse pass messages or reading the test code. Direct Node tests identify fields that do not apply. No business rules, State fields, Nodes, graph paths, assertions, expected results, or required scenarios were changed.
+
+- Final test-scope simplification: Limited execution and reporting to the ten original Section 10 scenarios, retaining their assertions and expected values. Removed additional validation, branch, boundary, and isolation tests from the notebook and used required scenario 2 as the example instead of a duplicate standalone invocation. Added numbered descriptions while retaining detailed reports. This change reduces output to the requested ten scenarios without changing business rules, State fields, Nodes, graph routing, or required expected results. This supersedes the earlier references to additional and direct Node tests in the reporting revision.
