@@ -451,16 +451,18 @@ Use assertions to verify expected results, not only printed output.
 
 ### 10.1 Readable test results
 
-For each of the ten required test scenarios, display readable output in Google Colab using simple formatting:
+For each of the ten required scenarios, display only:
 
-1. Test number, description, and input order.
-2. Actual output: `status`, final `item`, `delivery`, and `total`.
-3. The customer-facing `message`.
-4. The full chronological `steps` log, with each step on a separate line.
-5. Expected versus actual values for the assertions, showing concrete compared values where applicable rather than only whether the assertion condition is true.
-6. A clear PASS or FAIL indicator for each assertion and the overall scenario.
+1. Test number and short description.
+2. Input order.
+3. Final `status`, product (`item`), delivery method (`delivery`), and `total`.
+4. A short, human-readable explanation of processing, including applicable substitutions, discount decisions, delivery changes, and rejection reasons.
+5. The customer-facing `message`.
+6. One overall PASS or FAIL indicator.
 
-Preserve all ten required scenarios, their assertions, and expected results. Do not suppress failures or present failed tests as passing.
+Keep every existing assertion running silently on success. If an assertion fails, display a concise explanation of the failed check with concrete expected and actual values, then raise the error. Do not print successful individual assertions, operand dumps, State dictionaries, duplicate summaries, or the raw chronological log. Preserve the full chronological `steps` in the returned State; only its displayed presentation is summarized.
+
+Preserve all ten required scenarios, assertions, and expected results. Do not suppress failures or present failed tests as passing.
 
 ## 11. Technical Constraints
 
@@ -516,3 +518,5 @@ During development, the following presentation requirement was added:
 - Section 10.1: Required readable results for every test scenario, including the input, actual output, customer message, chronological steps on separate lines, expected versus actual assertion values, and PASS/FAIL indicators. This change was made so reviewers can understand each order outcome and verify the tests without interpreting terse pass messages or reading the test code. Direct Node tests identify fields that do not apply. No business rules, State fields, Nodes, graph paths, assertions, expected results, or required scenarios were changed.
 
 - Final test-scope simplification: Limited execution and reporting to the ten original Section 10 scenarios, retaining their assertions and expected values. Removed additional validation, branch, boundary, and isolation tests from the notebook and used required scenario 2 as the example instead of a duplicate standalone invocation. Added numbered descriptions while retaining detailed reports. This change reduces output to the requested ten scenarios without changing business rules, State fields, Nodes, graph routing, or required expected results. This supersedes the earlier references to additional and direct Node tests in the reporting revision.
+
+- Concise test reporting: Revised Section 10.1 to show only each required test's description, input, final result, short human-readable processing explanation, customer message, and one overall PASS/FAIL. Successful assertions now run silently; failures display the failed check and expected/actual values and still raise errors. This replaces verbose successful assertion reports and raw log displays to make results easier to read. All ten scenarios, assertions, expected results, business logic, and the full State processing log remain unchanged.
